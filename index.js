@@ -1,7 +1,9 @@
+// import Swal from "sweetalert2";
+
 const form = document.getElementById("contactForm");
 
 form.addEventListener("submit", function (event) {
-  event.preventDefault(); 
+  event.preventDefault();
 
   const formData = new FormData(this);
   const data = {
@@ -26,13 +28,10 @@ form.addEventListener("submit", function (event) {
     )}</p></body></html>`,
   };
 
-  fetch("https://api.mailersend.com/v1/email", {
+  fetch("http://localhost:3000/send-email", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Requested-With": "XMLHttpRequest",
-      Authorization:
-        "Bearer mlsn.4e26802135e1467df30e01c90f6743e84c91dab2530b07c71262d65cab2f6cc8",
     },
     body: JSON.stringify(data),
   })
@@ -40,14 +39,29 @@ form.addEventListener("submit", function (event) {
       if (response.ok) {
         console.log("Correo enviado con éxito");
         form.reset();
-        alert("Hemos recibido tu consulta. Te contactaremos pronto.");
+        Swal.fire({
+          title: "¡Éxito!",
+          text: "Gracias por contactarme, te daré una respuesta a la brevedad!",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
       } else {
         console.error("Error al enviar el correo");
-        // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
+        Swal.fire({
+          title: "Error",
+          text: "Hubo un problema al enviar tu consulta. Te agradezco si me contactas a través de Linkedin!",
+          icon: "error",
+          confirmButtonText: "Ok",
+        });
       }
     })
     .catch((error) => {
       console.error("Error al enviar el correo:", error);
-      // Aquí puedes manejar el error, como mostrar un mensaje de error al usuario
+      Swal.fire({
+        title: "Error",
+        text: "Hubo un problema al enviar tu consulta. Te agradezco si me contactas a través de Linkedin!",
+        icon: "error",
+        confirmButtonText: "Ok",
+      });
     });
 });
