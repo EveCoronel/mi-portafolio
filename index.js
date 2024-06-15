@@ -41,7 +41,7 @@ form.addEventListener("submit", function (event) {
         form.reset();
         Swal.fire({
           title: "¡Éxito!",
-          text: "Gracias por contactarme, te daré una respuesta a la brevedad!",
+          text: "¡Gracias por contactarme! Te estaré brindando una respuesta a la brevedad.",
           icon: "success",
           confirmButtonText: "Ok",
         });
